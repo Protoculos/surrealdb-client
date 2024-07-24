@@ -14,22 +14,50 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-surrealdb_client = "0.1.0"
+surrealdb_client = "2.0.0"
 ```
 
 Here's a quick example:
 
+_**Using with default settings:**_
 ```rust
 use surrealdb_client::{SurrealDBClient, ClientOptions};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let client = SurrealDBClient::new(ClientOptions::default())?;
-    let result = client.execute_sql("SELECT * FROM accounts").await?;
+    let default_client = SurrealDBClient::new(ClientOptions::default())?;
+    let result = default_client.execute_sql("SELECT * FROM accounts").await?;
     println!("Result: {}", result);
     Ok(())
 }
 ```
+
+_**Using with user settings:**_
+```rust
+use surrealdb_client::{SurrealDBClient, ClientOptions};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let custom_options = ClientOptions::new(
+        "crypto".to_string(),
+        "crypto".to_string(),
+        "http://localhost:8000/sql".to_string(),
+        Some("root".to_string()),
+        Some("root".to_string()),
+    );
+    let custom_client = SurrealDBClient::new(custom_options)?;
+    let result = custom_client.execute_sql("SELECT * FROM accounts").await?;
+    println!("Result: {}", result);
+    Ok(())
+}
+```
+
+## Compatibility
+
+| Crate Version | Compatible SurrealDB Version |
+|---------------|------------------------------|
+| 1.5.5         | 1.5.4                        |
+| 2.0.0         | v2.0.0-alpha.7               |
 
 ## License
 
