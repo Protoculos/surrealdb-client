@@ -1,6 +1,6 @@
 [package]
 name = "surrealdb_client"
-version = "1.5.4"
+version = "1.5.5"
 edition = "2021"
 description = "A Rust client for SurrealDB"
 license = "MIT OR Apache-2.0"
