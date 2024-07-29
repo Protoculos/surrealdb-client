@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-surrealdb_client = "2.0.0"
+surrealdb_client = "1.5.5"
 ```
 
 Here's a quick example:
