@@ -14,12 +14,12 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-surrealdb_client = "1.5.5"
+surrealdb_client = "2.0.0"
 ```
 
 Here's a quick example:
 
-// Using with default settings
+_**Using with default settings:**_
 ```rust
 use surrealdb_client::{SurrealDBClient, ClientOptions};
 
@@ -32,18 +32,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-// Using with user settings
+_**Using with user settings:**_
 ```rust
 use surrealdb_client::{SurrealDBClient, ClientOptions};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let custom_options = ClientOptions::new(
-        "crypto".to_string(),
-        "crypto".to_string(),
-        "http://localhost:8000/sql".to_string(),
-        Some("root".to_string()),
-        Some("root".to_string()),
+        "accounts".to_string(),  // ns
+        "accounts".to_string(),  // db
+        "http://localhost:8000/sql".to_string(), // url
+        Some("root".to_string()),  // login
+        Some("root".to_string()),  // password
     );
     let custom_client = SurrealDBClient::new(custom_options)?;
     let result = custom_client.execute_sql("SELECT * FROM accounts").await?;
@@ -52,9 +52,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-## Compatibility
+## Examples
 
-Version 1.x of this crate is compatible with SurrealDB version 1.x.
+```
+cargo run --example account_creation
+```
+
+## Compatibility
 
 | Crate Version | Compatible SurrealDB Version |
 |---------------|------------------------------|
