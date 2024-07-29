@@ -60,8 +60,8 @@ impl SurrealDBClient {
     pub async fn execute_sql(&self, sql: &str) -> Result<String, Box<dyn std::error::Error>> {
         let mut headers = reqwest::header::HeaderMap::new();
         headers.insert("Accept", "application/json".parse()?);
-        headers.insert("NS", self.options.ns.parse()?);
-        headers.insert("DB", self.options.db.parse()?);
+        headers.insert("Surreal-NS", self.options.ns.parse()?);
+        headers.insert("Surreal-DB", self.options.db.parse()?);
         headers.insert("Content-Type", "text/plain".parse()?);
         headers.insert(
             "Authorization",

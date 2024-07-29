@@ -39,17 +39,23 @@ use surrealdb_client::{SurrealDBClient, ClientOptions};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let custom_options = ClientOptions::new(
-        "crypto".to_string(),
-        "crypto".to_string(),
-        "http://localhost:8000/sql".to_string(),
-        Some("root".to_string()),
-        Some("root".to_string()),
+        "accounts".to_string(),  // ns
+        "accounts".to_string(),  // db
+        "http://localhost:8000/sql".to_string(), // url
+        Some("root".to_string()),  // login
+        Some("root".to_string()),  // password
     );
     let custom_client = SurrealDBClient::new(custom_options)?;
     let result = custom_client.execute_sql("SELECT * FROM accounts").await?;
     println!("Result: {}", result);
     Ok(())
 }
+```
+
+## Examples
+
+```
+cargo run --example account_creation
 ```
 
 ## Compatibility
