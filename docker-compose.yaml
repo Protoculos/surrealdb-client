@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:v1.5.4
+    container_name: surrealdb
+    restart: always
+    user: root
+    command: start file:/data/database.db
+    environment:
+      - SURREAL_USER=root
+      - SURREAL_PASS=root
+      - SURREAL_LOG=trace
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data:/data:rw
